@@ -40,6 +40,7 @@ export default function App() {
           value={note}
           placeholder="Enter notes"
           onChange={(e) => setNote(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && handleSaveNotes()}
         />
         <button onClick={handleSaveNotes}>Save</button>
       </div>
