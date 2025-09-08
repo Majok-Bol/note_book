@@ -2,20 +2,19 @@ import { useEffect, useState } from "react";
 
 export default function App() {
   const [note, setNote] = useState("");
-  const [storeNotes, setStoreNotes] = useState([]);
-  //load items from localStorage when app loads
-  useEffect(() => {
+  const [storeNotes, setStoreNotes] = useState(() => {
     try {
-      const savedNotes = JSON.parse(localStorage.getItem("notes")) || [];
-      setStoreNotes(savedNotes);
-    } catch (error) {
-      console.log("Error loading notes", error);
-      setStoreNotes([]);
+      return JSON.parse(localStorage.getItem("notes")) || [];
+    } catch {
+      return [];
     }
   }, []);
   //add items to local storage when store note changes
   useEffect(() => {
     try {
+      localStorage.setItem("test", "123");
+      localStorage.getItem("test"); // should return "123"
+
       localStorage.setItem("notes", JSON.stringify(storeNotes));
       console.log("LocalStorage:", localStorage.getItem("notes"));
     } catch (error) {
